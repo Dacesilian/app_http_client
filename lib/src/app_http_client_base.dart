@@ -1,5 +1,5 @@
+import 'package:app_http_client/src/app_http_client_exceptions.dart';
 import 'package:dio/dio.dart';
-import 'app_http_client_exceptions.dart';
 
 /// A callback that returns a Dio response, presumably from a Dio method
 /// it has called which performs an HTTP request, such as `dio.get()`,
@@ -27,6 +27,10 @@ class AppHttpClient {
   /// exception class which extends [AppHttpClientException].
   final ResponseExceptionMapper? exceptionMapper;
 
+  Dio getDio() {
+    return _client;
+  }
+
   /// HTTP GET request.
   Future<Response<T>> get<T>(
     String path, {
@@ -49,7 +53,7 @@ class AppHttpClient {
   /// HTTP POST request.
   Future<Response<T>> post<T>(
     String path, {
-    data,
+    dynamic data,
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
@@ -72,7 +76,7 @@ class AppHttpClient {
   /// HTTP PUT request.
   Future<Response<T>> put<T>(
     String path, {
-    data,
+    dynamic data,
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
@@ -95,7 +99,7 @@ class AppHttpClient {
   /// HTTP HEAD request.
   Future<Response<T>> head<T>(
     String path, {
-    data,
+    dynamic data,
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
@@ -114,7 +118,7 @@ class AppHttpClient {
   /// HTTP DELETE request.
   Future<Response<T>> delete<T>(
     String path, {
-    data,
+    dynamic data,
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
@@ -133,7 +137,7 @@ class AppHttpClient {
   /// HTTP PATCH request.
   Future<Response<T>> patch<T>(
     String path, {
-    data,
+    dynamic data,
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
