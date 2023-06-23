@@ -33,8 +33,10 @@ void main() async {
       final data = response.data;
       if (data != null && data is Map<String, dynamic>) {
         // We only map 418 responses that have json response data:
+        Map<String, dynamic> map = data;
+        // String str = map['message'] ?? 'I\'m a teapot';
         return TeapotResponseException(
-          message: data['message'] ?? 'I\'m a teapot',
+          message: "418 error",
           exception: exception,
         );
       }

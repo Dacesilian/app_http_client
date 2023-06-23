@@ -239,7 +239,7 @@ void main() {
 
       test('wraps an unknown DioError', () async {
         final mockError = MockDioError();
-        when(() => mockError.type).thenReturn(DioErrorType.other);
+        when(() => mockError.type).thenReturn(DioExceptionType.unknown);
         when(() => dio.get(any())).thenThrow(mockError);
 
         expect(
@@ -250,7 +250,7 @@ void main() {
 
       test('wraps a cancellation DioError', () async {
         final mockError = MockDioError();
-        when(() => mockError.type).thenReturn(DioErrorType.cancel);
+        when(() => mockError.type).thenReturn(DioExceptionType.cancel);
         when(() => dio.get(any())).thenThrow(mockError);
 
         expect(
@@ -267,7 +267,7 @@ void main() {
 
       test('wraps a timeout DioError', () async {
         final mockError = MockDioError();
-        when(() => mockError.type).thenReturn(DioErrorType.sendTimeout);
+        when(() => mockError.type).thenReturn(DioExceptionType.sendTimeout);
         when(() => dio.get(any())).thenThrow(mockError);
 
         expect(
@@ -286,7 +286,7 @@ void main() {
     group('response exception mapping', () {
       test('wraps a malformed response error', () async {
         final mockError = MockDioError();
-        when(() => mockError.type).thenReturn(DioErrorType.response);
+        when(() => mockError.type).thenReturn(DioExceptionType.badResponse);
         when(() => dio.get(any())).thenThrow(mockError);
 
         expect(
@@ -313,7 +313,7 @@ void main() {
 
       test('wraps a malformed response error with wrong data type', () async {
         final mockError = MockDioError();
-        when(() => mockError.type).thenReturn(DioErrorType.response);
+        when(() => mockError.type).thenReturn(DioExceptionType.badResponse);
         when(() => mockError.response).thenReturn(MockDioResponse<String>());
         when(() => dio.get(any())).thenThrow(mockError);
 
@@ -351,7 +351,7 @@ void main() {
         );
         final mockError = MockDioError();
         final mockResponse = MockDioResponse();
-        when(() => mockError.type).thenReturn(DioErrorType.response);
+        when(() => mockError.type).thenReturn(DioExceptionType.badResponse);
         when(() => mockError.response).thenReturn(mockResponse);
 
         when(() => dio.get(any())).thenThrow(mockError);
@@ -377,7 +377,7 @@ void main() {
         final mockResponse = MockDioResponse();
         const mockData = 'mock data';
         const statusCode = 404;
-        when(() => mockError.type).thenReturn(DioErrorType.response);
+        when(() => mockError.type).thenReturn(DioExceptionType.badResponse);
         when(() => mockError.response).thenReturn(mockResponse);
         when(() => mockResponse.data).thenReturn(mockData);
         when(() => mockResponse.statusCode).thenReturn(statusCode);

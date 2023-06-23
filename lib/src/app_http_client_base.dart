@@ -164,20 +164,20 @@ class AppHttpClient {
       return await method();
     } on DioError catch (exception) {
       switch (exception.type) {
-        case DioErrorType.cancel:
+        case DioExceptionType.cancel:
           throw AppNetworkException(
             reason: AppNetworkExceptionReason.canceled,
             exception: exception,
           );
-        case DioErrorType.connectTimeout:
-        case DioErrorType.receiveTimeout:
-        case DioErrorType.sendTimeout:
+        case DioExceptionType.connectionTimeout:
+        case DioExceptionType.receiveTimeout:
+        case DioExceptionType.sendTimeout:
           throw AppNetworkException(
             reason: AppNetworkExceptionReason.timedOut,
             exception: exception,
           );
-        case DioErrorType.response:
-          // For DioErrorType.response, we are guaranteed to have a
+        case DioExceptionType.badResponse:
+          // For DioExceptionType.response, we are guaranteed to have a
           // response object present on the exception.
           final response = exception.response;
           if (response == null || response is! Response<T>) {
@@ -191,7 +191,6 @@ class AppHttpClient {
                 statusCode: response.statusCode,
                 data: response.data,
               );
-        case DioErrorType.other:
         default:
           throw AppHttpClientException(exception: exception);
       }

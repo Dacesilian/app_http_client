@@ -1,16 +1,16 @@
 name: app_http_client
 description: A simple Dio HTTP client wrapper with simple, predictable errors.
-version: 1.0.0+1
+version: 1.0.0+2
 # homepage: https://www.example.com
 
 environment:
-  sdk: '>=2.18.0 <3.0.0'
+  sdk: '>=2.18.0 <4.0.0'
 
 dependencies:
-  dio: ^4.0.6
+  dio: ^5.2.1
 
 dev_dependencies:
   test: ^1.16.0
-  test_coverage: ^0.5.0
-  mocktail: ^0.1.4
-  very_good_analysis: ^2.1.2
+  # test_coverage: ^0.5.0
+  mocktail: ^0.3.0
+  very_good_analysis: ^5.0.0+1
